@@ -4,6 +4,7 @@
 }
 
 form {
+    min-width: 20vw;
     background-color: #fff;
     border-radius: 4px;
 }
