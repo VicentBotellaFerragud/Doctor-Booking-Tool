@@ -13,7 +13,7 @@
     />
   </div>
   <div class="mb-3">
-    <label for="password1" class="form-label">Password</label>
+    <label for="password1" class="form-label">Password*</label>
     <input
       type="password"
       class="form-control"
@@ -41,6 +41,9 @@
   {% endfor %} {% endfor %} {% endif %}
 
   <p>Already have an account? <a href="/login">log in</a></p>
+  <p class="fs-11">
+    * Must contain at least 1 letter, 1 number and 1 special character.
+  </p>
 </form>
 
 {% endblock %}

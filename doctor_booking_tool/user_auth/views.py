@@ -2,7 +2,8 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import NewUserForm
 from .utils import authenticate_and_log_in_user
-from . import password_validation
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 # Create your views here.
 
@@ -46,3 +47,10 @@ def sign_up(request):
     form = NewUserForm()
 
     return render(request, 'signup.html')
+
+
+@login_required(login_url='/login/')
+def log_out(request):
+    logout(request)
+
+    return redirect('/api/overview')

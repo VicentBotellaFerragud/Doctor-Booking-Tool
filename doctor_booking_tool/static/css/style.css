@@ -4,11 +4,15 @@
 }
 
 form {
-    min-width: 20vw;
+    min-width: 25vw;
     background-color: #fff;
     border-radius: 4px;
 }
 
 .dynamic-content-container {
     background-image: linear-gradient(-20deg, #00cdac 0%, #8ddad5 100%);
+}
+
+.fs-11 {
+    font-size: 11px !important;
 }
