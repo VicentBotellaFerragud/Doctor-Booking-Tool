@@ -1,45 +1,43 @@
 {% extends "base.html" %} {% block content %}
 
 <form class="p-3" method="POST">
+  <h3 class="mb-3">Signup</h3>
   {% csrf_token %}
   <div class="mb-3">
-    <label for="username" class="form-label">Username</label>
     <input
       type="text"
       class="form-control"
-      id="username"
       name="username"
+      placeholder="Username"
       required
     />
   </div>
   <div class="mb-3">
-    <label for="password1" class="form-label">Password*</label>
     <input
       type="password"
       class="form-control"
-      id="password1"
       name="password1"
+      placeholder="Password*"
       minlength="10"
       required
     />
   </div>
   <div class="mb-3">
-    <label for="password2" class="form-label">Confirm password</label>
     <input
       type="password"
       class="form-control"
-      id="password2"
       name="password2"
+      placeholder="Confirm password"
       minlength="10"
       required
     />
   </div>
-  <button type="submit" class="btn btn-primary mb-3">Sign Up</button>
 
   {% if form.errors %} {% for field in form %} {% for error in field.errors %}
-  <p class="text-danger fw-bold">{{ error | escape }}</p>
+  <p class="text-danger fs-14 fw-bold">{{ error | escape }}</p>
   {% endfor %} {% endfor %} {% endif %}
 
+  <button type="submit" class="btn btn-primary w-100 mb-3">Sign Up</button>
   <p>Already have an account? <a href="/login">log in</a></p>
   <p class="fs-11">
     * Must contain at least 1 letter, 1 number and 1 special character.

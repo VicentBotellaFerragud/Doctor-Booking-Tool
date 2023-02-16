@@ -1,34 +1,36 @@
 {% extends "base.html" %} {% block content %}
 
-<form class="p-3" method="POST">
+<form
+  class="p-3 {% if invalid_credentials %}invalid-credentials{% endif %}"
+  method="POST"
+>
+  <h3 class="mb-3">Login</h3>
   {% csrf_token %}
   <div class="mb-3">
-    <label for="username" class="form-label">Username</label>
     <input
       type="text"
       class="form-control"
-      id="username"
       name="username"
+      placeholder="Username"
       required
     />
   </div>
   <div class="mb-3">
-    <label for="password" class="form-label">Password</label>
     <input
       type="password"
       class="form-control"
-      id="password"
       name="password"
+      placeholder="Password"
       minlength="10"
       required
     />
   </div>
-  <button type="submit" class="btn btn-primary mb-3">Log In</button>
 
-  {% if false_credentials %}
-  <p class="text-danger fw-bold">Wrong username or password.</p>
+  {% if invalid_credentials %}
+  <p class="text-danger fs-14 fw-bold">Wrong username or password.</p>
   {% endif %}
 
+  <button type="submit" class="btn btn-primary w-100 mb-3">Log In</button>
   <p>Don't have an account yet? <a href="/signup">sign up</a></p>
 </form>
 
