@@ -52,3 +52,22 @@ form {
 .fs-11 {
     font-size: 11px !important;
 }
+
+.px-customized {
+    padding-inline: 2.25rem;
+}
+
+.wrapper {
+    height: calc(100vh - 56px);
+    flex-direction: column;
+}
+
+.patient-pic {
+    width: 10rem !important;
+    padding: 1rem;
+    background: lightgoldenrodyellow;
+}
+
+.card {
+    width: fit-content;
+}

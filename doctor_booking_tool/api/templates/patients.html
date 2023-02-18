@@ -1,0 +1,27 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="py-2 px-customized">
+  {% if users %}
+  <h5 class="my-3">These are all the patients*:</h5>
+
+  <div class="d-flex flex-wrap mb-3">
+    {% for user in users %}
+
+    <div class="card me-3">
+      {% load static %}
+      <img src="{% static 'img/man.png' %}" class="card-img-top patient-pic" />
+      <div class="card-body">
+        <h5 class="card-title text-center">{{ user.username }}</h5>
+      </div>
+    </div>
+
+    {% endfor %}
+  </div>
+
+  <p class="fs-11">* Patients are the users of the Doctor Booking Tool.</p>
+  {% else %}
+  <h5 class="my-3">These are no patients yet.</h5>
+  {% endif %}
+</div>
+
+{% endblock %}

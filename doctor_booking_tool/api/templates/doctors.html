@@ -1,0 +1,77 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="py-2 px-customized">
+  <div class="row">
+    {% if doctors %}
+    <div class="col-8">
+      <h5 class="my-3">These are all the doctors:</h5>
+
+      <div class="d-flex flex-wrap mb-3">
+        {% for doctor in doctors %}
+
+        <div class="card me-3">
+          {% load static %}
+          <img
+            src="{% static 'img/man.png' %}"
+            class="card-img-top patient-pic"
+          />
+          <div class="card-body">
+            <h5 class="card-title text-center">{{ doctor.name }}</h5>
+          </div>
+        </div>
+
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="col-8"><h5 class="my-3">These are no doctors yet.</h5></div>
+
+      {% endif %}
+      <div class="col-4">
+        <div>
+          <img src="{% static 'img/add-doctor.png' %}" class="" />
+        </div>
+        <form class="p-3" action="POST">
+          <h3 class="mb-3">Add new doctor</h3>
+          {% csrf_token %}
+          <div class="mb-3">
+            <select class="form-select" name="title">
+              <option value="Dr.">Dr.</option>
+              <option value="Prof. Dr.">Prof. Dr.</option>
+              <option value="Dr. rer. nat.">Dr. rer. nat.</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <input
+              type="text"
+              class="form-control"
+              name="name"
+              placeholder="Name"
+              maxlength="30"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <select class="form-select" name="gender">
+              <option value="Masculine">Masculine</option>
+              <option value="Femenine">Femenine</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <select class="form-select" name="specialty">
+              <option value="Family medicine">Family medicine</option>
+              <option value="Pediatrics">Pediatrics</option>
+              <option value="Urology">Urology</option>
+              <option value="Dermatology">Dermatology</option>
+              <option value="Emergency medicine">Emergency medicine</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary w-100 mb-3">
+            Add new doctor
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

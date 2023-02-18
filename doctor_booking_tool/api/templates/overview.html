@@ -1,0 +1,24 @@
+{% extends "base.html" %} {% block content %}
+
+<div
+  class="d-flex align-items-center justify-content-center py-2 px-customized wrapper"
+>
+  <h4 class="mb-3">Hello {{ request.user.username }}👋</h4>
+  <h3 class="mb-3">Welcome to the Doctor Booking Tool API overview!</h3>
+  <h5 class="mb-3">Which endpoint would you like to visit?</h5>
+  <div class="card">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <a href="/api/patients">/api/patients</a>
+      </li>
+      <li class="list-group-item">
+        <a href="/api/doctors">/api/doctors</a>
+      </li>
+      <li class="list-group-item">
+        <a href="/api/apppointments">/api/apppointments</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+{% endblock %}

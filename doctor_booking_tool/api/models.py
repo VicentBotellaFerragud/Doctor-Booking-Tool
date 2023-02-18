@@ -11,6 +11,10 @@ class Doctor(models.Model):
         ('Prof. Dr.', 'Prof. Dr.'),
         ('Dr. rer. nat.', 'Dr. rer. nat.')
     ]
+    gender_choices = [
+        ('Masculine', 'Masculine'),
+        ('Femenine', 'Femenine')
+    ]
     specialty_choices = [
         ('Family medicine', 'Family medicine'),
         ('Pediatrics', 'Pediatrics'),
@@ -22,6 +26,8 @@ class Doctor(models.Model):
     title = models.CharField(
         max_length=13, choices=title_choices, default='Dr.')
     name = models.CharField(max_length=30)
+    gender = models.CharField(
+        max_length=9, choices=gender_choices, default='Masculine')
     specialty = models.CharField(
         max_length=18, choices=specialty_choices, default='Family medicine')
 

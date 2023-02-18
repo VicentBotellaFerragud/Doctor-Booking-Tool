@@ -1,11 +1,10 @@
-from django.urls import path, include
-from .views import DoctorViewSet, AppointmentViewSet
-from rest_framework.routers import DefaultRouter
-
-router = DefaultRouter()
-router.register(r'doctors', DoctorViewSet, basename='doctors')
-router.register(r'appointments', AppointmentViewSet, basename='appointments')
+from django.urls import path
+from . import views
 
 urlpatterns = [
-    path('', include(router.urls))
+    path('', views.redirect_to_api_overview),
+    path('overview', views.api_overview, name='overview'),
+    path('patients', views.api_patients, name='patients'),
+    path('doctors', views.api_doctors, name='doctors'),
+    path('appointments', views.api_appointments, name='appointments')
 ]

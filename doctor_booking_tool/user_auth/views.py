@@ -31,7 +31,7 @@ def log_in(request):
     return render(request, 'login.html')
 
 
-def sign_up(request):
+def sign_up_and_log_in(request):
     if request.method == "POST":
         form = NewUserForm(request.POST)
 
@@ -48,7 +48,7 @@ def sign_up(request):
     return render(request, 'signup.html')
 
 
-@login_required(login_url='/login/')
+@login_required(login_url='/login')
 def log_out(request):
     logout(request)
 
