@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block content %}
 
 <div class="d-flex align-items-center justify-content-center vh-100">
-  <form class="p-3" method="POST">
+  <form class="standard-form p-3" method="POST">
     <h3 class="mb-3">Doctor Booking Tool</h3>
     {% csrf_token %}
     <div class="mb-3">
@@ -41,7 +41,7 @@
     <button type="submit" class="btn btn-primary w-100 mb-3">
       Create account and log in
     </button>
-    <p>Already have an account? <a href="/login">Log in</a></p>
+    <p class="fs-14">Already have an account? <a href="/login">Log in</a></p>
     <p class="fs-11">
       * Must contain at least 1 letter, 1 number and 1 special character.
     </p>

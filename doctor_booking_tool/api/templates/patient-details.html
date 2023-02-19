@@ -1,0 +1,24 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="wrapper">
+  {% if patient %}
+  <h6 class="mb-3">Patient with id {{ patient.pk }}:</h6>
+  <div class="d-flex flex-wrap mb-3">
+    <div class="card me-3">
+      {% load static %}
+      <img src="{% static 'img/man.png' %}" class="card-img-top patient-pic" />
+      <div class="card-body">
+        <h6 class="card-title">Id: {{ patient.pk }}</h6>
+        <form method="POST">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <h5 class="my-3">There is no patient with the passed-in id.</h5>
+  {% endif %}
+</div>
+
+{% endblock %}

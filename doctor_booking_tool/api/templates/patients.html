@@ -1,26 +1,27 @@
 {% extends "base.html" %} {% block content %}
 
-<div class="py-2 px-customized">
-  {% if users %}
-  <h5 class="my-3">These are all the patients*:</h5>
-
+<div class="wrapper">
+  {% if patients %}
+  <h6 class="mb-3">These are all the patients:</h6>
   <div class="d-flex flex-wrap mb-3">
-    {% for user in users %}
-
+    {% for patient in patients %}
     <div class="card me-3">
       {% load static %}
       <img src="{% static 'img/man.png' %}" class="card-img-top patient-pic" />
       <div class="card-body">
-        <h5 class="card-title text-center">{{ user.username }}</h5>
+        <h6 class="card-title">{{ patient.username }}</h6>
+        <a
+          class="btn btn-primary"
+          href="/api/patients/{{ patient.pk }}"
+          role="button"
+          >See details</a
+        >
       </div>
     </div>
-
     {% endfor %}
   </div>
-
-  <p class="fs-11">* Patients are the users of the Doctor Booking Tool.</p>
   {% else %}
-  <h5 class="my-3">These are no patients yet.</h5>
+  <h6>There are no patients yet.</h6>
   {% endif %}
 </div>
 

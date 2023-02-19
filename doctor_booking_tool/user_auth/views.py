@@ -16,7 +16,7 @@ def log_in(request):
     if request.user.is_authenticated:
         return redirect('/api')
 
-    if request.method == "POST":
+    if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
 
         if form.is_valid():
@@ -24,15 +24,15 @@ def log_in(request):
 
             return redirect('/api')
         else:
-            return render(request, 'login.html', {'invalid_credentials': True})
+            return render(request, 'login.html', {'login_or_signup_view': True, 'invalid_credentials': True})
 
     form = AuthenticationForm()
 
-    return render(request, 'login.html')
+    return render(request, 'login.html', {'login_or_signup_view': True})
 
 
 def sign_up_and_log_in(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         form = NewUserForm(request.POST)
 
         if form.is_valid():
@@ -41,11 +41,11 @@ def sign_up_and_log_in(request):
 
             return redirect('/api')
         else:
-            return render(request, 'signup.html', {'form': form})
+            return render(request, 'signup.html', {'login_or_signup_view': True, 'form': form})
 
     form = NewUserForm()
 
-    return render(request, 'signup.html')
+    return render(request, 'signup.html', {'login_or_signup_view': True})
 
 
 @login_required(login_url='/login')

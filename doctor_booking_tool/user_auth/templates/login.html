@@ -1,8 +1,10 @@
 {% extends "base.html" %} {% block content %}
 
-<div class="d-flex align-items-center justify-content-center vh-100">
+<div
+  class="d-flex align-items-center justify-content-center flex-column vh-100"
+>
   <form
-    class="p-3 {% if invalid_credentials %}invalid-credentials{% endif %}"
+    class="standard-form p-3 mb-3 {% if invalid_credentials %}invalid-credentials{% endif %}"
     method="POST"
   >
     <h3 class="mb-3">Doctor Booking Tool</h3>
@@ -32,8 +34,15 @@
     {% endif %}
 
     <button type="submit" class="btn btn-primary w-100 mb-3">Log in</button>
-    <p>Don't have an account yet? <a href="/signup">Create one</a></p>
+    <p class="fs-14">
+      Don't have an account yet? <a href="/signup">Create one</a> or
+      <a href="/api/overview">log in as guest*</a>.
+    </p>
   </form>
+  <p class="fs-11">
+    * As a guest you'll be able to see the list of doctors but you won't be able
+    to make an appointment with any of them.
+  </p>
 </div>
 
 {% endblock %}

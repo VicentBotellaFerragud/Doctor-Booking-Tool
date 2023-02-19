@@ -1,23 +1,35 @@
 {% extends "base.html" %} {% block content %}
 
-<div
-  class="d-flex align-items-center justify-content-center py-2 px-customized wrapper"
->
-  <h4 class="mb-3">Hello {{ request.user.username }}👋</h4>
-  <h3 class="mb-3">Welcome to the Doctor Booking Tool API overview!</h3>
-  <h5 class="mb-3">Which endpoint would you like to visit?</h5>
-  <div class="card">
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">
-        <a href="/api/patients">/api/patients</a>
-      </li>
-      <li class="list-group-item">
-        <a href="/api/doctors">/api/doctors</a>
-      </li>
-      <li class="list-group-item">
-        <a href="/api/apppointments">/api/apppointments</a>
-      </li>
-    </ul>
+<div class="wrapper">
+  <h3 class="mb-3">
+    {% if request.user.is_authenticated %} Hello {{ request.user.username }}👋
+    {% endif %} Welcome to the Doctor Booking Tool!
+  </h3>
+  <h6 class="mb-3">What would you like to do?</h6>
+  <div class="mb-3">
+    <a
+      class="btn btn-primary {% if not request.user.is_superuser %}disabled{% endif %}"
+      href="/api/patients"
+      role="button"
+      >See all patients*</a
+    >
+    <a class="btn btn-primary" href="/api/doctors" role="button"
+      >See all doctors</a
+    >
+    <a
+      class="btn btn-primary {% if not request.user.is_authenticated %}disabled{% endif %}"
+      href="/api/apppointments"
+      role="button"
+      >See your appointments*</a
+    >
+  </div>
+  <div>
+    <p class="fs-11">
+      * "See all patients" is only enabled for users with administrator rights.
+    </p>
+    <p class="fs-11">
+      * "See your appointments" is only enabled for registered users.
+    </p>
   </div>
 </div>
 

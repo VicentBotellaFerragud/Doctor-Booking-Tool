@@ -15,26 +15,39 @@ def redirect_to_api_overview(request):
     return redirect('/api/overview')
 
 
-@login_required(login_url='/login')
 def api_overview(request):
     return render(request, 'overview.html')
 
 
-@login_required(login_url='/login')
 def api_patients(request):
-    users = User.objects.all()
+    if not request.user.is_superuser:
+        return redirect('/api/overview')
 
-    return render(request, 'patients.html', {'users': users})
+    patients = User.objects.filter(is_superuser=False)
+
+    return render(request, 'patients.html', {'patients': patients})
 
 
-@login_required(login_url='/login')
+def patient_details(request, pk):
+    if not request.user.is_superuser:
+        return redirect('/api/overview')
+
+    patient = User.objects.get(pk=pk)
+
+    if request.method == 'POST':
+        patient.delete()
+
+        return redirect('/api/patients')
+
+    return render(request, 'patient-details.html', {'patient': patient})
+
+
 def api_doctors(request):
     doctors = Doctor.objects.all()
 
     return render(request, 'doctors.html', {'doctors': doctors})
 
 
-@login_required(login_url='/login')
 def api_appointments(request):
     appointments = Appointment.objects.all()
 
