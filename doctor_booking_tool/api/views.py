@@ -7,6 +7,7 @@ from .models import Doctor, Appointment
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
+from .utils import create_four_sample_doctors_if_doctor_table_empty
 
 # Create your views here.
 
@@ -43,6 +44,7 @@ def patient_details(request, pk):
 
 
 def api_doctors(request):
+    create_four_sample_doctors_if_doctor_table_empty()
     doctors = Doctor.objects.all()
 
     return render(request, 'doctors.html', {'doctors': doctors})
