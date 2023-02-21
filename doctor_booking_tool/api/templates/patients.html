@@ -3,11 +3,14 @@
 <div class="wrapper">
   {% if patients %}
   <h6 class="mb-3">These are all the patients:</h6>
-  <div class="d-flex flex-wrap mb-3">
+  <div class="d-flex flex-wrap justify-content-center p-3 br-4 light-dark-bg">
     {% for patient in patients %}
-    <div class="card me-3">
+    <div class="card m-3">
       {% load static %}
-      <img src="{% static 'img/man.png' %}" class="card-img-top patient-pic" />
+      <img
+        src="{% static 'img/man.png' %}"
+        class="card-img-top pic small-pic"
+      />
       <div class="card-body">
         <h6 class="card-title">{{ patient.username }}</h6>
         <a

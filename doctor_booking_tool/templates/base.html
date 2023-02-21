@@ -7,6 +7,7 @@
     <title>Doctor-Booking-Tool</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <script defer src="{% static 'js/script.js' %}"></script>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -41,31 +42,26 @@
                 >API overview</a
               >
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item">
               <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
+                class="nav-link active"
+                aria-current="page"
+                href="/api/patients"
+                >Patients</a
               >
-                API endpoints
-              </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a class="dropdown-item" href="/api/patients"
-                    >/api/patients</a
-                  >
-                </li>
-                <li>
-                  <a class="dropdown-item" href="/api/doctors">/api/doctors</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="/api/appointments"
-                    >/api/appointments</a
-                  >
-                </li>
-              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/api/doctors"
+                >Doctors</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="/api/appointments"
+                >Appointments</a
+              >
             </li>
           </ul>
           {% if request.user.is_authenticated %}

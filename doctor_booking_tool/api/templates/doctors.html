@@ -1,31 +1,83 @@
 {% extends "base.html" %} {% block content %}
 
-<div class="wrapper">
-  {% if doctors %}
-  <h6 class="mb-3">These are all the doctors:</h6>
-  <div class="d-flex flex-wrap mb-3">
-    {% for doctor in doctors %}
-    <div class="card me-3">
-      {% load static %}
-      <img
-        src="{% if doctor.gender == 'Masculine' %}{% static 'img/doctor-man.png' %}{% else %}{% static 'img/doctor-woman.png' %}{% endif %}"
-        class="card-img-top patient-pic"
-      />
-      <div class="card-body">
-        <h6 class="card-title">{{ doctor.name }}</h6>
-        <a
-          class="btn btn-primary"
-          href="/api/doctors/{{ doctor.pk }}"
-          role="button"
-          >See details</a
+<div id="doctorsWrapper" class="wrapper">
+  <div id="doctorsContainer">
+    <div class="d-flex justify-content-between">
+      <h6 class="mb-3">These are all the doctors:</h6>
+      <div class="text-end">
+        <button
+          type="button"
+          class="btn btn-primary mb-3 {% if not request.user.is_superuser %}disabled{% endif %}"
+          onclick="removeDoctorsContainerAndDisplayAddNewDoctorForm()"
         >
+          Add new doctor*
+        </button>
+        <p class="fs-11">
+          * "Add new doctor" is only enabled for users with administrator
+          rights.
+        </p>
       </div>
     </div>
-    {% endfor %}
+
+    <div class="d-flex flex-wrap justify-content-center p-3 br-4 light-dark-bg">
+      {% for doctor in doctors %}
+      <div class="card m-3">
+        {% load static %}
+        <img
+          src="{% if doctor.gender == 'Masculine' %}{% static 'img/doctor-man.png' %}{% else %}{% static 'img/doctor-woman.png' %}{% endif %}"
+          class="card-img-top pic small-pic"
+        />
+        <div class="card-body">
+          <h6 class="card-title">{{ doctor.name }}</h6>
+          <a
+            class="btn btn-primary"
+            href="/api/doctors/{{ doctor.pk }}"
+            role="button"
+            >See details</a
+          >
+        </div>
+      </div>
+      {% endfor %}
+    </div>
   </div>
-  {% else %}
-  <h6>There are no doctors yet.</h6>
-  {% endif %}
+
+  <form id="addNewDoctorForm" class="standard-form p-3 d-none" method="POST">
+    <h3 class="mb-3">Add new doctor</h3>
+    {% csrf_token %}
+    <div class="mb-3">
+      <select class="form-select" name="title">
+        <option value="Dr.">Dr.</option>
+        <option value="Prof. Dr.">Prof. Dr.</option>
+        <option value="Dr. rer. nat.">Dr. rer. nat.</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <input
+        type="text"
+        class="form-control"
+        name="name"
+        placeholder="Name"
+        maxlength="30"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <select class="form-select" name="gender">
+        <option value="Masculine">Masculine</option>
+        <option value="Femenine">Femenine</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <select class="form-select" name="specialty">
+        <option value="Family medicine">Family medicine</option>
+        <option value="Pediatrics">Pediatrics</option>
+        <option value="Urology">Urology</option>
+        <option value="Dermatology">Dermatology</option>
+        <option value="Emergency medicine">Emergency medicine</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Add new doctor</button>
+  </form>
 </div>
 
 {% endblock %}

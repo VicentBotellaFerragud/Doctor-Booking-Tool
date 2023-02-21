@@ -1,0 +1,49 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="wrapper">
+  {% if doctor %}
+  <h6 class="mb-3">Doctor with id {{ doctor.pk }}:</h6>
+  <div class="d-flex flex-wrap mb-3">
+    <div class="card me-3">
+      {% load static %}
+      <img
+        src="{% if doctor.gender == 'Masculine' %}{% static 'img/doctor-man.png' %}{% else %}{% static 'img/doctor-woman.png' %}{% endif %}"
+        class="card-img-top pic big-pic"
+      />
+      <div class="card-body">
+        <p class="card-title">
+          <span class="fw-bold">Id:</span> {{ doctor.pk }}
+        </p>
+        <p class="card-title">
+          <span class="fw-bold">Title:</span> {{ doctor.title }}
+        </p>
+        <p class="card-title">
+          <span class="fw-bold">Name:</span> {{ doctor.name }}
+        </p>
+        <p class="card-title">
+          <span class="fw-bold">Gender:</span> {{ doctor.gender }}
+        </p>
+        <p class="card-title">
+          <span class="fw-bold">Specialty:</span> {{ doctor.specialty }}
+        </p>
+        <form method="POST">
+          {% csrf_token %}
+          <button
+            type="submit"
+            class="btn btn-danger {% if not request.user.is_superuser %}disabled{% endif %}"
+          >
+            Delete*
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <p class="fs-11">
+    * "Delete" is only enabled for users with administrator rights.
+  </p>
+  {% else %}
+  <h6>There is no doctor with the passed-in id.</h6>
+  {% endif %}
+</div>
+
+{% endblock %}

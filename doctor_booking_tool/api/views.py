@@ -8,6 +8,7 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
 from .utils import create_four_sample_doctors_if_doctor_table_empty
+from .forms import NewDoctorForm
 
 # Create your views here.
 
@@ -47,7 +48,28 @@ def api_doctors(request):
     create_four_sample_doctors_if_doctor_table_empty()
     doctors = Doctor.objects.all()
 
+    if request.method == 'POST':
+        form = NewDoctorForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+
+            return redirect('/api/doctors')
+
+    form = NewDoctorForm()
+
     return render(request, 'doctors.html', {'doctors': doctors})
+
+
+def doctor_details(request, pk):
+    doctor = Doctor.objects.get(pk=pk)
+
+    if request.method == 'POST':
+        doctor.delete()
+
+        return redirect('/api/doctors')
+
+    return render(request, 'doctor-details.html', {'doctor': doctor})
 
 
 def api_appointments(request):

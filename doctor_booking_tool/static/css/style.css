@@ -55,16 +55,32 @@
 }
 
 .wrapper {
-    height: calc(100vh - 56px);
+    min-height: calc(100vh - 56px);
     padding: 2.25rem;
 }
 
-.patient-pic {
-    width: 10rem !important;
+.pic {
     padding: 1rem;
     background: lightgoldenrodyellow;
 }
 
+.small-pic {
+    width: 10rem !important;
+
+}
+
+.big-pic {
+    width: 15rem !important;
+}
+
 .card {
     width: fit-content;
+}
+
+.br-4 {
+    border-radius: 4px;
+}
+
+.light-dark-bg {
+    background-color: rgba(0, 0, 0, 0.05);
 }
