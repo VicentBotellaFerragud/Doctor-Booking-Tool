@@ -13,3 +13,10 @@ def create_four_sample_doctors_if_doctor_table_empty():
             Doctor(title='Prof. Dr.', name='Elizabeth Miller',
                    gender='Femenine', specialty='Dermatology')
         ])
+
+
+def assign_patient_and_doctor_to_appointment_and_save_it(request, form):
+    appointment = form.save(commit=False)
+    appointment.patient = request.user
+    appointment.doctor = Doctor.objects.get(pk=request.POST.get('doctor'))
+    appointment.save()

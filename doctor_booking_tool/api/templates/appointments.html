@@ -1,5 +1,93 @@
 {% extends "base.html" %} {% block content %}
 
-<div class="py-2 px-customized"></div>
+<div id="appointmentsWrapper" class="wrapper">
+  <div id="appointmentsContainer">
+    <div class="d-flex justify-content-between">
+      <h6 class="mb-3">These are all your appointments:</h6>
+      <div class="text-end">
+        <button
+          type="button"
+          class="btn btn-primary mb-3"
+          onclick="removeAppointmentsContainerAndDisplayAddNewAppointmentForm()"
+        >
+          Add new appointment
+        </button>
+      </div>
+    </div>
+
+    {% if appointments %}
+    <div class="d-flex flex-wrap justify-content-center p-3 br-4 light-dark-bg">
+      {% for appointment in appointments %}
+      <div class="card m-3">
+        {% load static %}
+        <img
+          src="{% static 'img/appointment.png' %}"
+          class="card-img-top pic small-pic"
+        />
+        <div class="card-body">
+          <h6 class="card-title">{{ appointment.title }}</h6>
+          <a
+            class="btn btn-primary"
+            href="/api/appointments/{{ appointment.pk }}"
+            role="button"
+            >See details</a
+          >
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <h6>You have no appointments yet.</h6>
+    {% endif %}
+  </div>
+
+  <form
+    id="addNewAppointmentForm"
+    class="standard-form p-3 d-none"
+    method="POST"
+  >
+    <h3 class="mb-3">Add new appointment</h3>
+    {% csrf_token %}
+    <div class="mb-3">
+      <input
+        type="text"
+        class="form-control"
+        name="title"
+        placeholder="Title"
+        maxlength="30"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <textarea
+        class="form-control"
+        name="description"
+        rows="3"
+        placeholder="Description"
+        maxlength="120"
+        required
+      ></textarea>
+    </div>
+    <div class="mb-3">
+      <input
+        id="appointmentDatePicker"
+        type="date"
+        class="form-control"
+        name="date"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <select class="form-select" name="doctor">
+        {% for doctor in doctors %}
+        <option value="{{ doctor.pk }}">{{ doctor.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary w-100">
+      Add new appointment
+    </button>
+  </form>
+</div>
 
 {% endblock %}

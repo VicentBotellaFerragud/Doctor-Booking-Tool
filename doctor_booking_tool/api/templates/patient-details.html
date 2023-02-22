@@ -3,22 +3,21 @@
 <div class="wrapper">
   {% if patient %}
   <h6 class="mb-3">Patient with id {{ patient.pk }}:</h6>
-  <div class="d-flex flex-wrap mb-3">
-    <div class="card me-3">
-      {% load static %}
-      <img src="{% static 'img/man.png' %}" class="card-img-top pic big-pic" />
-      <div class="card-body">
-        <p class="card-title">
-          <span class="fw-bold">Id:</span> {{ patient.pk }}
-        </p>
-        <p class="card-title">
-          <span class="fw-bold">Name:</span> {{ patient.username }}
-        </p>
-        <form method="POST">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-danger">Delete</button>
-        </form>
-      </div>
+
+  <div class="card flex-row mb-3">
+    {% load static %}
+    <img src="{% static 'img/man.png' %}" class="card-img-top pic big-pic" />
+    <div class="card-body">
+      <p class="card-title">
+        <span class="fw-bold">Id:</span> {{ patient.pk }}
+      </p>
+      <p class="card-title">
+        <span class="fw-bold">Name:</span> {{ patient.username }}
+      </p>
+      <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </form>
     </div>
   </div>
   {% else %}

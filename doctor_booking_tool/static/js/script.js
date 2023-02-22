@@ -7,3 +7,16 @@ function removeDoctorsContainerAndDisplayAddNewDoctorForm() {
     doctorsContainer.classList.add('d-none');
     addNewDoctorForm.classList.remove('d-none');
 }
+
+const appointmentDatePicker = document.getElementById('appointmentDatePicker');
+appointmentDatePicker.min = new Date().toISOString().split('T')[0];
+
+const appointmentsWrapper = document.getElementById('appointmentsWrapper');
+const appointmentsContainer = document.getElementById('appointmentsContainer');
+const addNewAppointmentForm = document.getElementById('addNewAppointmentForm');
+
+function removeAppointmentsContainerAndDisplayAddNewAppointmentForm() {
+    appointmentsWrapper.classList.add('d-flex', 'justify-content-center', 'align-items-center');
+    appointmentsContainer.classList.add('d-none');
+    addNewAppointmentForm.classList.remove('d-none');
+}

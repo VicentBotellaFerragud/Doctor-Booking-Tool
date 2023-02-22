@@ -7,8 +7,8 @@ from .models import Doctor, Appointment
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
-from .utils import create_four_sample_doctors_if_doctor_table_empty
-from .forms import NewDoctorForm
+from .utils import create_four_sample_doctors_if_doctor_table_empty, assign_patient_and_doctor_to_appointment_and_save_it
+from .forms import NewDoctorForm, NewAppointmentForm
 
 # Create your views here.
 
@@ -73,6 +73,37 @@ def doctor_details(request, pk):
 
 
 def api_appointments(request):
-    appointments = Appointment.objects.all()
+    if not request.user.is_authenticated:
+        return redirect('/api/overview')
 
-    return render(request, 'appointments.html', {'appointments': appointments})
+    appointments = Appointment.objects.all()
+    doctors = Doctor.objects.all()
+
+    if request.method == 'POST':
+        form = NewAppointmentForm(request.POST)
+
+        if form.is_valid():
+            assign_patient_and_doctor_to_appointment_and_save_it(request, form)
+
+            return redirect('/api/appointments')
+
+    form = NewAppointmentForm()
+
+    return render(request, 'appointments.html', {'appointments': appointments, 'doctors': doctors})
+
+
+def appointment_details(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('/api/overview')
+
+    appointment = Appointment.objects.get(pk=pk)
+
+    if request.method == 'POST':
+        if appointment.patient == request.user:
+            appointment.delete()
+
+            return redirect('/api/appointments')
+        else:
+            return redirect('/api/appointments')
+
+    return render(request, 'appointment-details.html', {'appointment': appointment})
