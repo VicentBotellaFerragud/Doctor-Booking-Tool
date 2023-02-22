@@ -26,6 +26,11 @@
       <p class="card-title">
         <span class="fw-bold">Doctor:</span> {{ appointment.doctor }}
       </p>
+      {% if request.user.is_superuser %}
+      <p class="card-title">
+        <span class="fw-bold">Doctor:</span> {{ appointment.patient }}
+      </p>
+      {% endif %}
       <form method="POST">
         {% csrf_token %}
         <button type="submit" class="btn btn-danger">Delete</button>

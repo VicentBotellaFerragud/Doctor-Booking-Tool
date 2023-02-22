@@ -20,7 +20,8 @@
       class="btn btn-primary {% if not request.user.is_authenticated %}disabled{% endif %}"
       href="/api/appointments"
       role="button"
-      >See your appointments*</a
+      >{% if request.user.is_superuser %}See all appointments*{% else %}See your
+      appointments*{% endif %}</a
     >
   </div>
   <div>
@@ -28,7 +29,9 @@
       * "See all patients" is only enabled for users with administrator rights.
     </p>
     <p class="fs-11">
-      * "See your appointments" is only enabled for registered users.
+      {% if request.user.is_superuser %}* "See all appointments" is only enabled
+      for users with administrator rights.{% else %}* "See your appointments" is
+      only enabled for registered users.{% endif %}
     </p>
   </div>
 </div>

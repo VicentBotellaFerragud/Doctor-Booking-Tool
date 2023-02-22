@@ -18,7 +18,6 @@
         </p>
       </div>
     </div>
-
     <div class="d-flex flex-wrap justify-content-center p-3 br-4 light-dark-bg">
       {% for doctor in doctors %}
       <div class="card m-3">
@@ -40,7 +39,6 @@
       {% endfor %}
     </div>
   </div>
-
   <form id="addNewDoctorForm" class="standard-form p-3 d-none" method="POST">
     <h3 class="mb-3">Add new doctor</h3>
     {% csrf_token %}

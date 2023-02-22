@@ -1,4 +1,4 @@
-from .models import Doctor
+from .models import Doctor, Appointment
 
 
 def create_four_sample_doctors_if_doctor_table_empty():
@@ -13,6 +13,15 @@ def create_four_sample_doctors_if_doctor_table_empty():
             Doctor(title='Prof. Dr.', name='Elizabeth Miller',
                    gender='Femenine', specialty='Dermatology')
         ])
+
+
+def set_appointments(request):
+    if request.user.is_superuser:
+        appointments = Appointment.objects.all()
+    else:
+        appointments = Appointment.objects.filter(patient=request.user)
+
+    return appointments
 
 
 def assign_patient_and_doctor_to_appointment_and_save_it(request, form):

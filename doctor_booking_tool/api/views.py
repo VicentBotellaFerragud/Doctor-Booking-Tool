@@ -1,16 +1,8 @@
 from django.shortcuts import redirect, render
-from django.http import JsonResponse
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from django.contrib.auth.decorators import login_required
 from .models import Doctor, Appointment
-from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
-from .utils import create_four_sample_doctors_if_doctor_table_empty, assign_patient_and_doctor_to_appointment_and_save_it
+from .utils import create_four_sample_doctors_if_doctor_table_empty, set_appointments, assign_patient_and_doctor_to_appointment_and_save_it
 from .forms import NewDoctorForm, NewAppointmentForm
-
-# Create your views here.
 
 
 def redirect_to_api_overview(request):
@@ -76,7 +68,7 @@ def api_appointments(request):
     if not request.user.is_authenticated:
         return redirect('/api/overview')
 
-    appointments = Appointment.objects.all()
+    appointments = set_appointments(request)
     doctors = Doctor.objects.all()
 
     if request.method == 'POST':
@@ -98,12 +90,12 @@ def appointment_details(request, pk):
 
     appointment = Appointment.objects.get(pk=pk)
 
-    if request.method == 'POST':
-        if appointment.patient == request.user:
-            appointment.delete()
+    if not request.user.is_superuser and appointment.patient != request.user:
+        return redirect('/api/appointments')
 
-            return redirect('/api/appointments')
-        else:
-            return redirect('/api/appointments')
+    if request.method == 'POST':
+        appointment.delete()
+
+        return redirect('/api/appointments')
 
     return render(request, 'appointment-details.html', {'appointment': appointment})

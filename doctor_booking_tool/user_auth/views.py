@@ -5,8 +5,6 @@ from .utils import authenticate_and_log_in_user
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 
-# Create your views here.
-
 
 def redirect_to_login(request):
     return redirect('/login')
