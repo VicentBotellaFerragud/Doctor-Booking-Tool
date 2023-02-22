@@ -84,3 +84,7 @@
 .light-dark-bg {
     background-color: rgba(0, 0, 0, 0.05);
 }
+
+.mw-10 {
+    max-width: 10rem;
+}

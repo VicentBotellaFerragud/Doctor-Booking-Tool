@@ -9,20 +9,24 @@
       src="{% if doctor.gender == 'Masculine' %}{% static 'img/doctor-man.png' %}{% else %}{% static 'img/doctor-woman.png' %}{% endif %}"
       class="card-img-top pic big-pic"
     />
-    <div class="card-body">
-      <p class="card-title"><span class="fw-bold">Id:</span> {{ doctor.pk }}</p>
-      <p class="card-title">
-        <span class="fw-bold">Title:</span> {{ doctor.title }}
-      </p>
-      <p class="card-title">
-        <span class="fw-bold">Name:</span> {{ doctor.name }}
-      </p>
-      <p class="card-title">
-        <span class="fw-bold">Gender:</span> {{ doctor.gender }}
-      </p>
-      <p class="card-title">
-        <span class="fw-bold">Specialty:</span> {{ doctor.specialty }}
-      </p>
+    <div class="card-body d-flex flex-column justify-content-between">
+      <div>
+        <p class="card-title">
+          <span class="fw-bold">Id:</span> {{ doctor.pk }}
+        </p>
+        <p class="card-title">
+          <span class="fw-bold">Title:</span> {{ doctor.title }}
+        </p>
+        <p class="card-title">
+          <span class="fw-bold">Name:</span> {{ doctor.name }}
+        </p>
+        <p class="card-title">
+          <span class="fw-bold">Gender:</span> {{ doctor.gender }}
+        </p>
+        <p class="card-title">
+          <span class="fw-bold">Specialty:</span> {{ doctor.specialty }}
+        </p>
+      </div>
       <form method="POST">
         {% csrf_token %}
         <button

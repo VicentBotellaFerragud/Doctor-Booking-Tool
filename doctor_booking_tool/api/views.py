@@ -70,6 +70,7 @@ def api_appointments(request):
 
     appointments = set_appointments(request)
     doctors = Doctor.objects.all()
+    patients = User.objects.filter(is_superuser=False)
 
     if request.method == 'POST':
         form = NewAppointmentForm(request.POST)
@@ -81,7 +82,7 @@ def api_appointments(request):
 
     form = NewAppointmentForm()
 
-    return render(request, 'appointments.html', {'appointments': appointments, 'doctors': doctors})
+    return render(request, 'appointments.html', {'appointments': appointments, 'doctors': doctors, 'patients': patients})
 
 
 def appointment_details(request, pk):

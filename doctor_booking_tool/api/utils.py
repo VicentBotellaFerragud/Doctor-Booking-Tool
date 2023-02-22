@@ -1,4 +1,5 @@
 from .models import Doctor, Appointment
+from django.contrib.auth.models import User
 
 
 def create_four_sample_doctors_if_doctor_table_empty():
@@ -17,15 +18,20 @@ def create_four_sample_doctors_if_doctor_table_empty():
 
 def set_appointments(request):
     if request.user.is_superuser:
-        appointments = Appointment.objects.all()
+        return Appointment.objects.all()
     else:
-        appointments = Appointment.objects.filter(patient=request.user)
-
-    return appointments
+        return Appointment.objects.filter(patient=request.user)
 
 
 def assign_patient_and_doctor_to_appointment_and_save_it(request, form):
     appointment = form.save(commit=False)
-    appointment.patient = request.user
+    appointment.patient = set_patient(request)
     appointment.doctor = Doctor.objects.get(pk=request.POST.get('doctor'))
     appointment.save()
+
+
+def set_patient(request):
+    if request.user.is_superuser:
+        return User.objects.get(pk=request.POST.get('patient'))
+    else:
+        return request.user

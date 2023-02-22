@@ -9,28 +9,30 @@
       src="{% static 'img/appointment.png' %}"
       class="card-img-top pic big-pic"
     />
-    <div class="card-body">
-      <p class="card-title">
-        <span class="fw-bold">Title:</span> {{ appointment.title }}
-      </p>
-      <p class="card-title">
-        <span class="fw-bold">Description:</span>
-        {{ appointment.description }}
-      </p>
-      <p class="card-title">
-        <span class="fw-bold">Date:</span> {{ appointment.date }}
-      </p>
-      <p class="card-title">
-        <span class="fw-bold">Created at:</span> {{ appointment.created_at }}
-      </p>
-      <p class="card-title">
-        <span class="fw-bold">Doctor:</span> {{ appointment.doctor }}
-      </p>
-      {% if request.user.is_superuser %}
-      <p class="card-title">
-        <span class="fw-bold">Doctor:</span> {{ appointment.patient }}
-      </p>
-      {% endif %}
+    <div class="card-body d-flex flex-column justify-content-between">
+      <div>
+        <p class="card-title">
+          <span class="fw-bold">Title:</span> {{ appointment.title }}
+        </p>
+        <p class="card-title">
+          <span class="fw-bold">Description:</span>
+          {{ appointment.description }}
+        </p>
+        <p class="card-title">
+          <span class="fw-bold">Date:</span> {{ appointment.date }}
+        </p>
+        <p class="card-title">
+          <span class="fw-bold">Created at:</span> {{ appointment.created_at }}
+        </p>
+        <p class="card-title">
+          <span class="fw-bold">Doctor:</span> {{ appointment.doctor }}
+        </p>
+        {% if request.user.is_superuser %}
+        <p class="card-title">
+          <span class="fw-bold">Patient:</span> {{ appointment.patient }}
+        </p>
+        {% endif %}
+      </div>
       <form method="POST">
         {% csrf_token %}
         <button type="submit" class="btn btn-danger">Delete</button>

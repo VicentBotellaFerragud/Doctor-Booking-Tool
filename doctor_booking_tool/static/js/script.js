@@ -9,7 +9,10 @@ function removeDoctorsContainerAndDisplayAddNewDoctorForm() {
 }
 
 const appointmentDatePicker = document.getElementById('appointmentDatePicker');
-appointmentDatePicker.min = new Date().toISOString().split('T')[0];
+
+if (appointmentDatePicker) {
+    appointmentDatePicker.min = new Date().toISOString().split('T')[0];
+}
 
 const appointmentsWrapper = document.getElementById('appointmentsWrapper');
 const appointmentsContainer = document.getElementById('appointmentsContainer');
