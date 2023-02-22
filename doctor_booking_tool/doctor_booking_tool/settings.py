@@ -43,12 +43,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'doctor_booking_tool.urls'
 
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ]
-}
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
