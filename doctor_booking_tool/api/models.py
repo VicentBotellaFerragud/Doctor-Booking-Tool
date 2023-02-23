@@ -35,7 +35,7 @@ class Doctor(models.Model):
 
 class Appointment(models.Model):
     title = models.CharField(max_length=30)
-    description = models.CharField(max_length=120)
+    description = models.TextField(max_length=120)
     date = models.DateField()
     created_at = models.DateField(default=datetime.date.today)
     patient = models.ForeignKey(User, on_delete=models.CASCADE)
