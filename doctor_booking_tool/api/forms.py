@@ -5,7 +5,7 @@ from .models import Doctor, Appointment
 class NewDoctorForm(forms.ModelForm):
     class Meta:
         model = Doctor
-        fields = ('title', 'name', 'gender', 'specialty')
+        fields = ('title', 'name', 'gender', 'specialty',)
 
     def save(self):
         super(NewDoctorForm, self).save()
