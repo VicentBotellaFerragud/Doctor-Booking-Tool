@@ -7,30 +7,30 @@ class MinimumLengthPasswordValidator:
     def validate(self, password, user=None):
         if len(password) < 10:
             raise ValidationError(
-                _("Password must be at least 10 characters long."))
+                _('Password must be at least 10 characters long.'))
 
     def get_help_text(self):
-        return _("Password must be at least 10 characters long.")
+        return _('Password must be at least 10 characters long.')
 
 
 class LetterInPasswordValidator:
     def validate(self, password, user=None):
         if bool(re.search('[a-zA-Z]', password)) == False:
             raise ValidationError(
-                _("Password must contain at least 1 letter."))
+                _('Password must contain at least 1 letter.'))
 
     def get_help_text(self):
-        return _("Password must contain at least 1 letter.")
+        return _('Password must contain at least 1 letter.')
 
 
 class NumberInPasswordValidator:
     def validate(self, password, user=None):
         if bool(re.search(r'\d', password)) == False:
             raise ValidationError(
-                _("Password must contain at least 1 number."))
+                _('Password must contain at least 1 number.'))
 
     def get_help_text(self):
-        return _("Password must contain at least 1 number.")
+        return _('Password must contain at least 1 number.')
 
 
 class SpecialCharacterInPasswordValidator:
@@ -39,7 +39,7 @@ class SpecialCharacterInPasswordValidator:
     def validate(self, password, user=None):
         if self.special_characters.search(password) == None:
             raise ValidationError(
-                _("Password must contain at least 1 special character."))
+                _('Password must contain at least 1 special character.'))
 
     def get_help_text(self):
-        return _("Password must contain at least 1 special character.")
+        return _('Password must contain at least 1 special character.')
